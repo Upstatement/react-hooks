@@ -1,11 +1,13 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { act } from '@testing-library/react-hooks';
+import { renderHook } from './utils';
 import { useState } from '../src';
 
 describe('useState', () => {
   test('returns a tuple of state and setter function', () => {
     const initialValue = 'ok';
-    const { result } = renderHook(() => useState(initialValue));
+    const { result, renderCount } = renderHook(() => useState(initialValue));
 
+    expect(renderCount.current).toBe(1);
     expect(result.current.length).toBe(2);
     expect(typeof result.current[0]).toBe(typeof initialValue);
     expect(typeof result.current[1]).toBe('function');
@@ -13,8 +15,9 @@ describe('useState', () => {
 
   test('accepts functions for initial values', () => {
     const initialValue = jest.fn(() => 'ok');
-    const { result } = renderHook(() => useState(initialValue));
+    const { result, renderCount } = renderHook(() => useState(initialValue));
 
+    expect(renderCount.current).toBe(1);
     expect(initialValue).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe(initialValue());
   });
@@ -32,35 +35,38 @@ describe('useState', () => {
   });
 
   test('setter function updates state', () => {
-    const { result } = renderHook(() => useState('ok'));
+    const { result, renderCount } = renderHook(() => useState('ok'));
 
     expect(result.current[0]).toBe('ok');
     act(() => {
       result.current[1]('help');
     });
+    expect(renderCount.current).toBe(2);
     expect(result.current[0]).toBe('help');
   });
 
-  test(`setter function's accepts function that passes current state`, () => {
-    const { result } = renderHook(() => useState('ok'));
+  test(`setter function accepts function that passes current state`, () => {
+    const { result, renderCount } = renderHook(() => useState('ok'));
     const updateFn = jest.fn(state => state);
 
     expect(result.current[0]).toBe('ok');
     act(() => {
       result.current[1](updateFn);
     });
+    expect(renderCount.current).toBe(1); // same value, won't re-render
     expect(updateFn).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe('ok');
   });
 
   test('setter function accepts function to update state', () => {
-    const { result } = renderHook(() => useState('ok'));
+    const { result, renderCount } = renderHook(() => useState('ok'));
     const updateFn = jest.fn(() => 'help');
 
     expect(result.current[0]).toBe('ok');
     act(() => {
       result.current[1](updateFn);
     });
+    expect(renderCount.current).toBe(2);
     expect(updateFn).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe('help');
   });

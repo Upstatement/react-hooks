@@ -15,7 +15,9 @@ const useMap = <T, U>(entries?: [T, U][]) => {
   state.has = key => mapRef.current.has(key);
   state.delete = key => {
     const wasDeleted = mapRef.current.delete(key);
-    update();
+    if (wasDeleted) {
+      update();
+    }
     return wasDeleted;
   };
 
