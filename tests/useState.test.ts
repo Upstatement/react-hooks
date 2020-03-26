@@ -6,7 +6,7 @@ describe('useState', () => {
     const initialValue = 'ok';
     const { result } = renderHook(() => useState(initialValue));
 
-    expect(result.current.length).toEqual(2);
+    expect(result.current.length).toBe(2);
     expect(typeof result.current[0]).toBe(typeof initialValue);
     expect(typeof result.current[1]).toBe('function');
   });
@@ -15,7 +15,7 @@ describe('useState', () => {
     const initialValue = jest.fn(() => 'ok');
     const { result } = renderHook(() => useState(initialValue));
 
-    expect(initialValue).toBeCalledTimes(1);
+    expect(initialValue).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe(initialValue());
   });
 
@@ -41,7 +41,7 @@ describe('useState', () => {
     expect(result.current[0]).toBe('help');
   });
 
-  test('setter function\'s accepts function that passes current state', () => {
+  test(`setter function's accepts function that passes current state`, () => {
     const { result } = renderHook(() => useState('ok'));
     const updateFn = jest.fn(state => state);
 
@@ -49,7 +49,7 @@ describe('useState', () => {
     act(() => {
       result.current[1](updateFn);
     });
-    expect(updateFn).toBeCalledTimes(1);
+    expect(updateFn).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe('ok');
   });
 
@@ -61,11 +61,11 @@ describe('useState', () => {
     act(() => {
       result.current[1](updateFn);
     });
-    expect(updateFn).toBeCalledTimes(1);
+    expect(updateFn).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe('help');
   });
 
-  test('setter doesn\'t update after unmount', () => {
+  test(`setter doesn't update after unmount`, () => {
     const { result, unmount } = renderHook(() => useState('ok'));
 
     expect(result.current[0]).toBe('ok');

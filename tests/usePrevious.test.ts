@@ -6,7 +6,7 @@ describe('usePrevious', () => {
     const initialValue = 'ok';
     const { result } = renderHook(() => usePrevious(initialValue));
 
-    expect(result.current).toEqual(initialValue);
+    expect(result.current).toBe(initialValue);
   });
 
   test('keeps the same value after one render', () => {
@@ -17,9 +17,9 @@ describe('usePrevious', () => {
       initialProps,
     });
 
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(newProps);
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
   });
 
   test('updates to new value after second render', () => {
@@ -30,11 +30,11 @@ describe('usePrevious', () => {
       initialProps,
     });
 
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(newProps);
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(newProps);
-    expect(result.current).toEqual(newProps.value);
+    expect(result.current).toBe(newProps.value);
   });
 
   test('updates to new value after second render', () => {
@@ -45,11 +45,11 @@ describe('usePrevious', () => {
       initialProps,
     });
 
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(newProps);
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(newProps);
-    expect(result.current).toEqual(newProps.value);
+    expect(result.current).toBe(newProps.value);
   });
 
   test('keeps first update after second update', () => {
@@ -60,10 +60,10 @@ describe('usePrevious', () => {
       initialProps,
     });
 
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(newProps);
-    expect(result.current).toEqual(initialProps.value);
+    expect(result.current).toBe(initialProps.value);
     rerender(initialProps);
-    expect(result.current).toEqual(newProps.value);
+    expect(result.current).toBe(newProps.value);
   });
 });

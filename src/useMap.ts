@@ -1,9 +1,9 @@
 import { useDebugValue, useRef } from 'react';
 import useForceUpdate from './useForceUpdate';
 
-const useMap = <T, U>() => {
+const useMap = <T, U>(entries?: readonly (readonly [T, U])[] | null | undefined) => {
   const update = useForceUpdate();
-  const mapRef = useRef(new Map<T, U>());
+  const mapRef = useRef(new Map<T, U>(entries));
 
   const state = new Map(mapRef.current);
   state.get = key => mapRef.current.get(key);
