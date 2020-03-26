@@ -16,7 +16,7 @@ describe('useMap', () => {
   });
 
   test('accepts the same props as a map', () => {
-    const entries: readonly [string, string][] = [['hello', 'world']];
+    const entries: [string, string][] = [['hello', 'world']];
     const { result } = renderHook(() => useMap(entries));
 
     expect(result.current).toMatchObject(new Map(entries));

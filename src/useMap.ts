@@ -1,7 +1,7 @@
 import { useDebugValue, useRef } from 'react';
 import useForceUpdate from './useForceUpdate';
 
-const useMap = <T, U>(entries?: readonly (readonly [T, U])[] | null | undefined) => {
+const useMap = <T, U>(entries?: [T, U][]) => {
   const update = useForceUpdate();
   const mapRef = useRef(new Map<T, U>(entries));
 
