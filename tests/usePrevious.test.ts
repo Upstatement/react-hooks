@@ -36,34 +36,4 @@ describe('usePrevious', () => {
     rerender(newProps);
     expect(result.current).toBe(newProps.value);
   });
-
-  test('updates to new value after second render', () => {
-    const initialProps = { value: 'ok' };
-    const newProps = { value: 'help' };
-
-    const { result, rerender } = renderHook(({ value }) => usePrevious(value), {
-      initialProps,
-    });
-
-    expect(result.current).toBe(initialProps.value);
-    rerender(newProps);
-    expect(result.current).toBe(initialProps.value);
-    rerender(newProps);
-    expect(result.current).toBe(newProps.value);
-  });
-
-  test('keeps first update after second update', () => {
-    const initialProps = { value: 'ok' };
-    const newProps = { value: 'help' };
-
-    const { result, rerender } = renderHook(({ value }) => usePrevious(value), {
-      initialProps,
-    });
-
-    expect(result.current).toBe(initialProps.value);
-    rerender(newProps);
-    expect(result.current).toBe(initialProps.value);
-    rerender(initialProps);
-    expect(result.current).toBe(newProps.value);
-  });
 });
