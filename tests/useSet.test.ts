@@ -30,7 +30,6 @@ describe('useSet', () => {
   describe('`add` method', () => {
     test('adds a new value to set', () => {
       const { result } = renderHook(() => useSet<number>());
-      const addSpy = jest.spyOn(result.current, 'add');
 
       act(() => {
         result.current.add(1);
@@ -38,7 +37,6 @@ describe('useSet', () => {
 
       expect(result.current.has(1)).toBeTruthy();
       expect(result.current.size).toBe(1);
-      expect(addSpy).toHaveBeenCalledTimes(1);
     });
 
     test('causes re-render', () => {
@@ -67,7 +65,6 @@ describe('useSet', () => {
   describe('`clear` method', () => {
     test('removes all values from set', () => {
       const { result } = renderHook(() => useSet([1, 2, 3]));
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       act(() => {
         result.current.clear();
@@ -78,50 +75,42 @@ describe('useSet', () => {
       expect(result.current.has(2)).toBeFalsy();
       expect(result.current.has(3)).toBeFalsy();
       expect(result.current.size).toBe(0);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     test('causes re-render', () => {
       const { result, renderCount } = renderHook(() => useSet([1, 2, 3]));
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       expect(renderCount.current).toBe(1);
       act(() => {
         result.current.clear();
       });
       expect(renderCount.current).toBe(2);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     test(`invalid use doesn't do anything`, () => {
       const { result } = renderHook(() => useSet());
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       const set = result.current;
       act(() => {
         set.clear();
       });
       expect(result.current).toMatchObject(set);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     test(`invalid use doesn't cause re-render`, () => {
       const { result, renderCount } = renderHook(() => useSet());
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       expect(renderCount.current).toBe(1);
       act(() => {
         result.current.clear();
       });
       expect(renderCount.current).toBe(1);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('`delete` method', () => {
     test('removes single value from set', () => {
       const { result } = renderHook(() => useSet([1]));
-      const deleteSpy = jest.spyOn(result.current, 'delete');
 
       act(() => {
         result.current.delete(1);
@@ -129,7 +118,6 @@ describe('useSet', () => {
 
       expect(result.current).toMatchObject(new Set());
       expect(result.current.has(1)).toBeFalsy();
-      expect(deleteSpy).toHaveBeenCalledTimes(1);
     });
 
     test('causes re-render', () => {
@@ -144,26 +132,22 @@ describe('useSet', () => {
 
     test(`invalid use doesn't do anything`, () => {
       const { result } = renderHook(() => useSet());
-      const deleteSpy = jest.spyOn(result.current, 'delete');
 
       const set = result.current;
       act(() => {
         set.delete(1);
       });
       expect(result.current).toMatchObject(set);
-      expect(deleteSpy).toHaveBeenCalledTimes(1);
     });
 
     test(`invalid use doesn't cause re-render`, () => {
       const { result, renderCount } = renderHook(() => useSet());
-      const deleteSpy = jest.spyOn(result.current, 'delete');
 
       expect(renderCount.current).toBe(1);
       act(() => {
         result.current.delete(1);
       });
       expect(renderCount.current).toBe(1);
-      expect(deleteSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

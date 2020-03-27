@@ -28,7 +28,6 @@ describe('useStateReducer', () => {
 
   test('setter updates respective state variable', () => {
     const { result } = renderHook(() => useStateReducer({ foo: 'bar' }));
-    const setSpy = jest.spyOn(result.current[1], 'foo');
 
     act(() => {
       result.current[1].foo('baz');
@@ -36,7 +35,6 @@ describe('useStateReducer', () => {
 
     const [state] = result.current;
     expect(state.foo).toBe('baz');
-    expect(setSpy).toHaveBeenCalledTimes(1);
   });
 
   test('initial state with function resolves to return value', () => {
@@ -54,7 +52,6 @@ describe('useStateReducer', () => {
   test('setter function accepts function to update state', () => {
     const initialState = { foo: 'bar', baz: '' };
     const { result } = renderHook(() => useStateReducer(initialState));
-    const setSpy = jest.spyOn(result.current[1], 'baz');
 
     const stateSetter = jest.fn(state => state.foo);
 
@@ -62,7 +59,6 @@ describe('useStateReducer', () => {
       result.current[1].baz(stateSetter);
     });
 
-    expect(setSpy).toHaveBeenCalledTimes(1);
     expect(stateSetter).toHaveBeenCalledTimes(1);
 
     const [state] = result.current;
@@ -73,13 +69,11 @@ describe('useStateReducer', () => {
   test('setter function causes re-render', () => {
     const initialState = { foo: 'bar' };
     const { result, renderCount } = renderHook(() => useStateReducer(initialState));
-    const setSpy = jest.spyOn(result.current[1], 'foo');
 
     act(() => {
       result.current[1].foo('baz');
     });
 
-    expect(setSpy).toHaveBeenCalledTimes(1);
     expect(renderCount.current).toBe(2);
     const [state] = result.current;
     expect(state.foo).toBe('baz');

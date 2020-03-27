@@ -31,8 +31,6 @@ describe('useMap', () => {
     test('adds new key-value pair to map', () => {
       const { result } = renderHook(() => useMap<string, string>());
 
-      const setSpy = jest.spyOn(result.current, 'set');
-
       let setResult;
       act(() => {
         setResult = result.current.set('hello', 'world');
@@ -42,7 +40,6 @@ describe('useMap', () => {
       expect(result.current.size).toBe(1);
       expect(result.current.has('hello')).toBeTruthy();
       expect(result.current.get('hello')).toBe('world');
-      expect(setSpy).toHaveBeenCalledTimes(1);
     });
 
     test('causes re-render', () => {
@@ -75,7 +72,6 @@ describe('useMap', () => {
           ['foo', 'bar'],
         ]),
       );
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       act(() => {
         result.current.clear();
@@ -85,7 +81,6 @@ describe('useMap', () => {
       expect(result.current.has('hello')).toBeFalsy();
       expect(result.current.has('foo')).toBeFalsy();
       expect(result.current.size).toBe(0);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     test('causes re-render', () => {
@@ -95,38 +90,32 @@ describe('useMap', () => {
           ['foo', 'bar'],
         ]),
       );
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       expect(renderCount.current).toBe(1);
       act(() => {
         result.current.clear();
       });
       expect(renderCount.current).toBe(2);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     test(`invalid use doesn't do anything`, () => {
       const { result } = renderHook(() => useMap());
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       const map = result.current;
       act(() => {
         map.clear();
       });
       expect(result.current).toMatchObject(map);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     test(`invalid use doesn't cause re-render`, () => {
       const { result, renderCount } = renderHook(() => useMap());
-      const clearSpy = jest.spyOn(result.current, 'clear');
 
       expect(renderCount.current).toBe(1);
       act(() => {
         result.current.clear();
       });
       expect(renderCount.current).toBe(1);
-      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -134,7 +123,6 @@ describe('useMap', () => {
     test('removes key-value pair from map', () => {
       const { result } = renderHook(() => useMap<string, string>([['hello', 'world']]));
 
-      const deleteSpy = jest.spyOn(result.current, 'delete');
       let deleteResult;
       act(() => {
         deleteResult = result.current.delete('hello');
@@ -146,7 +134,6 @@ describe('useMap', () => {
       expect(result.current.size).toBe(0);
       expect(result.current.has('hello')).toBeFalsy();
       expect(result.current.get('hello')).toBeUndefined();
-      expect(deleteSpy).toHaveBeenCalledTimes(1);
     });
 
     test('causes re-render', () => {
@@ -166,8 +153,6 @@ describe('useMap', () => {
     test(`invalid use doesn't do anything`, () => {
       const { result } = renderHook(() => useMap<string, string>());
 
-      const deleteSpy = jest.spyOn(result.current, 'delete');
-
       let badDeleteResult;
       act(() => {
         badDeleteResult = result.current.delete('hello');
@@ -175,7 +160,6 @@ describe('useMap', () => {
 
       expect(badDeleteResult).toBeFalsy();
       expect(result.current.size).toBe(0);
-      expect(deleteSpy).toHaveBeenCalledTimes(1);
     });
 
     test(`invalid use doesn't cause re-render`, () => {

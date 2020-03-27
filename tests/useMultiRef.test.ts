@@ -21,7 +21,6 @@ describe('useMultiRef', () => {
 
   test('ref setter adds item to array', () => {
     const { result } = renderHook(() => useMultiRef());
-    const setRefSpy = jest.spyOn(result.current, '1');
 
     const el = document.createElement('div');
 
@@ -29,7 +28,6 @@ describe('useMultiRef', () => {
       result.current[1](0)(el);
     });
 
-    expect(setRefSpy).toHaveBeenCalledTimes(1);
     const [refs] = result.current;
     expect(refs.current).toHaveLength(1);
     expect(refs.current[0]).toMatchObject(el);
@@ -37,7 +35,6 @@ describe('useMultiRef', () => {
 
   test('ref setter works in loop', () => {
     const { result } = renderHook(() => useMultiRef());
-    const setRefSpy = jest.spyOn(result.current, '1');
 
     const els = Array.from(Array(6)).map(() => document.createElement('li'));
     act(() => {
@@ -46,7 +43,6 @@ describe('useMultiRef', () => {
       });
     });
 
-    expect(setRefSpy).toHaveBeenCalledTimes(els.length);
     const [refs] = result.current;
     expect(refs.current).toHaveLength(els.length);
     expect(refs.current).toMatchObject(els);
@@ -57,7 +53,6 @@ describe('useMultiRef', () => {
 
   test('ref setter overrides existing indices if changed', () => {
     const { result } = renderHook(() => useMultiRef());
-    const setRefSpy = jest.spyOn(result.current, '1');
 
     const firstList = Array.from(Array(4)).map(() => document.createElement('li'));
     act(() => {
@@ -65,7 +60,6 @@ describe('useMultiRef', () => {
         result.current[1](i)(el);
       });
     });
-    expect(setRefSpy).toHaveBeenCalledTimes(firstList.length);
 
     const secondList = Array.from(Array(2)).map(() => document.createElement('div'));
     act(() => {
@@ -73,7 +67,6 @@ describe('useMultiRef', () => {
         result.current[1](i)(el);
       });
     });
-    expect(setRefSpy).toHaveBeenCalledTimes(firstList.length + secondList.length);
 
     const [refs] = result.current;
     expect(refs.current).toHaveLength(firstList.length);
@@ -87,7 +80,6 @@ describe('useMultiRef', () => {
 
   test('clear method removes all items from array ref', () => {
     const { result } = renderHook(() => useMultiRef());
-    const clearRefsSpy = jest.spyOn(result.current, '2');
 
     const els = Array.from(Array(4)).map(() => document.createElement('li'));
     act(() => {
@@ -100,7 +92,6 @@ describe('useMultiRef', () => {
     act(() => {
       result.current[2]();
     });
-    expect(clearRefsSpy).toHaveBeenCalledTimes(1);
     expect(result.current[0].current).toHaveLength(0);
   });
 });
