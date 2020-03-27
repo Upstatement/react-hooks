@@ -1,4 +1,7 @@
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
+
+type SetRef<T> = (ref: T) => void;
+type SetRefFactory<T> = (index: number) => SetRef<T>;
 
 /**
  * React hook for storing an array of refs. This is useful
@@ -6,7 +9,7 @@ import { useRef } from 'react';
  *
  * @returns returns the array ref and a function to set a ref at a given index
  */
-const useMultiRef = <T>() => {
+const useMultiRef = <T>(): [MutableRefObject<T[]>, SetRefFactory<T>, () => void] => {
   const refs = useRef<T[]>([]);
 
   /**
@@ -20,11 +23,18 @@ const useMultiRef = <T>() => {
    * @param index the index to set the ref to
    * @returns the ref setter function
    */
-  const setRef = (index: number) => (ref: T) => {
+  const setRef: SetRefFactory<T> = index => ref => {
     refs.current[index] = ref;
   };
 
-  return [refs, setRef];
+  /**
+   * Removes all refs currently inside the array ref.
+   */
+  const clearRefs = () => {
+    refs.current = [];
+  };
+
+  return [refs, setRef, clearRefs];
 };
 
 export default useMultiRef;
