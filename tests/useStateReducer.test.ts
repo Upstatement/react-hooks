@@ -69,4 +69,19 @@ describe('useStateReducer', () => {
     expect(state.baz).toBe(state.foo);
     expect(state.baz).toBe('bar');
   });
+
+  test('setter function causes re-render', () => {
+    const initialState = { foo: 'bar' };
+    const { result, renderCount } = renderHook(() => useStateReducer(initialState));
+    const setSpy = jest.spyOn(result.current[1], 'foo');
+
+    act(() => {
+      result.current[1].foo('baz');
+    });
+
+    expect(setSpy).toHaveBeenCalledTimes(1);
+    expect(renderCount.current).toBe(2);
+    const [state] = result.current;
+    expect(state.foo).toBe('baz');
+  });
 });
