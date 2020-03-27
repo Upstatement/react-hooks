@@ -11,6 +11,7 @@ module.exports = {
       diagnostics: false,
     },
   },
+  setupFilesAfterEnv: ['jest-extended'],
   testURL: 'http://localhost',
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts'],

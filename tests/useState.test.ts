@@ -9,8 +9,8 @@ describe('useState', () => {
 
       expect(renderCount.current).toBe(1);
       expect(result.current.length).toBe(2);
-      expect(typeof result.current[0]).toBe(typeof initialValue);
-      expect(typeof result.current[1]).toBe('function');
+      expect(result.current[0]).toBeString();
+      expect(result.current[1]).toBeFunction();
     });
 
     test('accepts functions for initial values', () => {

@@ -5,13 +5,12 @@ describe('useStateReducer', () => {
   test('returns a state object and setter object', () => {
     const { result } = renderHook(() => useStateReducer({}));
 
-    expect(Array.isArray(result.current)).toBeTruthy();
-    expect(result.current).toHaveLength(2);
+    expect(result.current).toBeArrayOfSize(2);
 
     const [state, set] = result.current;
-    expect(typeof state).toBe('object');
+    expect(state).toBeObject();
     expect(Object.keys(state)).toHaveLength(0);
-    expect(typeof set).toBe('object');
+    expect(set).toBeObject();
     expect(Object.keys(set)).toHaveLength(0);
   });
 
@@ -19,11 +18,11 @@ describe('useStateReducer', () => {
     const { result } = renderHook(() => useStateReducer({ foo: 'bar' }));
 
     const [state, set] = result.current;
-    expect(state).toHaveProperty('foo');
+    expect(state).toContainKey('foo');
     expect(state.foo).toBe('bar');
 
-    expect(set).toHaveProperty('foo');
-    expect(typeof set.foo).toBe('function');
+    expect(set).toContainKey('foo');
+    expect(set.foo).toBeFunction();
   });
 
   test('setter updates respective state variable', () => {
@@ -45,7 +44,7 @@ describe('useStateReducer', () => {
     expect(foo).toHaveBeenCalledTimes(1);
 
     const [state] = result.current;
-    expect(typeof state.foo).toBe('string');
+    expect(state.foo).toBeString();
     expect(state.foo).toBe('bar');
   });
 

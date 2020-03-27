@@ -5,18 +5,15 @@ describe('useMultiRef', () => {
   test('returns a ref of an array, a ref setter function, and a clear function', () => {
     const { result } = renderHook(() => useMultiRef());
 
-    expect(Array.isArray(result.current)).toBeTruthy();
-    expect(result.current).toHaveLength(3);
+    expect(result.current).toBeArrayOfSize(3);
 
     const [refs, setRef, clearRefs] = result.current;
 
     expect('current' in refs).toBeTruthy();
-    expect(Array.isArray(refs.current)).toBeTruthy();
-    expect(refs.current).toHaveLength(0);
+    expect(refs.current).toBeArrayOfSize(0);
 
-    expect(typeof setRef).toBe('function');
-
-    expect(typeof clearRefs).toBe('function');
+    expect(setRef).toBeFunction();
+    expect(clearRefs).toBeFunction();
   });
 
   test('ref setter adds item to array', () => {
