@@ -5,15 +5,16 @@ const useMap = <T, U>(entries?: [T, U][]) => {
   const update = useForceUpdate();
   const mapRef = useRef(new Map<T, U>(entries));
 
-  const state = new Map(mapRef.current);
-  state.get = key => mapRef.current.get(key);
-  state.set = (key, value) => {
-    const updatedMap = mapRef.current.set(key, value);
-    update();
-    return updatedMap;
+  const map = new Map(mapRef.current);
+
+  map.clear = () => {
+    if (mapRef.current.size > 0) {
+      mapRef.current.clear();
+      update();
+    }
   };
-  state.has = key => mapRef.current.has(key);
-  state.delete = key => {
+
+  map.delete = key => {
     const wasDeleted = mapRef.current.delete(key);
     if (wasDeleted) {
       update();
@@ -21,9 +22,15 @@ const useMap = <T, U>(entries?: [T, U][]) => {
     return wasDeleted;
   };
 
-  useDebugValue(state);
+  map.set = (key, value) => {
+    const updatedMap = mapRef.current.set(key, value);
+    update();
+    return updatedMap;
+  };
 
-  return state;
+  useDebugValue(map);
+
+  return map;
 };
 
 export default useMap;

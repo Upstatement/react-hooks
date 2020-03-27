@@ -1,26 +1,36 @@
 import { useDebugValue, useRef } from 'react';
 import useForceUpdate from './useForceUpdate';
 
-const useSet = <T>() => {
+const useSet = <T>(iterable?: Iterable<T>) => {
   const update = useForceUpdate();
-  const setRef = useRef(new Set<T>([]));
+  const setRef = useRef(new Set<T>(iterable));
 
-  const state = new Set<T>(setRef.current);
-  state.add = (value: T) => {
+  const set = new Set<T>(setRef.current);
+
+  set.add = (value: T) => {
     const updatedSet = setRef.current.add(value);
     update();
     return updatedSet;
   };
-  state.has = value => setRef.current.has(value);
-  state.delete = (value: T) => {
+
+  set.clear = () => {
+    if (setRef.current.size > 0) {
+      setRef.current.clear();
+      update();
+    }
+  };
+
+  set.delete = (value: T) => {
     const wasDeleted = setRef.current.delete(value);
-    update();
+    if (wasDeleted) {
+      update();
+    }
     return wasDeleted;
   };
 
-  useDebugValue(state);
+  useDebugValue(set);
 
-  return state;
+  return set;
 };
 
 export default useSet;
