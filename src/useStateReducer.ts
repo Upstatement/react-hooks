@@ -41,19 +41,19 @@ const getPropertyValue = <T extends Record<string, any>, K extends keyof T>(obje
 const useStateReducer = <T extends Record<string, any>>(
   initialState: T,
 ): [State<T>, { [Key in keyof State<T>]: Dispatch<State<T>, Key> }] => {
-  const stateReducer = (state: State<T>, action: Action<State<T>>): State<T> => {
+  const [stateReducer] = useState(() => (state: State<T>, action: Action<State<T>>): State<T> => {
     const { payload, type } = action;
 
     let value = payload;
-    if (typeof value === 'function') {
-      value = payload(state[type]);
+    if (typeof payload === 'function') {
+      value = payload(state);
     }
 
     return {
       ...state,
       [type]: value,
     };
-  };
+  });
 
   const [delayedInitialState] = useState(() => {
     const keys: (keyof InitialState<T>)[] = Object.keys(initialState);
@@ -80,20 +80,5 @@ const useStateReducer = <T extends Record<string, any>>(
 
   return [state, stateDispatcher];
 };
-
-// const funcComp = () => {
-//   const [state, set] = useStateReducer({
-//     help: 'ok',
-//     number: 2,
-//     newFunc: (): string => 'hey!',
-//   });
-
-//   state.newFunc;
-//   state.help;
-//   set.newFunc('hey');
-//   set.help('hey');
-//   set.number(1);
-//   set.number(() => 23433.432);
-// };
 
 export default useStateReducer;
