@@ -1,5 +1,4 @@
-import { act } from '@testing-library/react-hooks';
-import { renderHook } from './utils';
+import { act, renderHook } from './utils';
 import { useMap } from '../src';
 
 describe('useMap', () => {
@@ -47,7 +46,7 @@ describe('useMap', () => {
   });
 
   test('`set` method updates map', () => {
-    const { result, renderCount } = renderHook(() => useMap<string, string>());
+    const { result } = renderHook(() => useMap<string, string>());
 
     const setSpy = jest.spyOn(result.current, 'set');
 
@@ -56,8 +55,6 @@ describe('useMap', () => {
       setResult = result.current.set('hello', 'world');
     });
 
-    expect(renderCount.current).toBe(2); // re-renders on update
-
     expect(result.current).toMatchObject(setResult);
     expect(result.current.size).toBe(1);
     expect(result.current.has('hello')).toBeTruthy();
@@ -65,13 +62,18 @@ describe('useMap', () => {
     expect(setSpy).toHaveBeenCalledTimes(1);
   });
 
-  test('`delete` method updates map', () => {
+  test('`set` method causes re-render', () => {
     const { result, renderCount } = renderHook(() => useMap<string, string>());
 
-    let setResult;
+    expect(renderCount.current).toBe(1);
     act(() => {
-      setResult = result.current.set('hello', 'world');
+      result.current.set('hello', 'world');
     });
+    expect(renderCount.current).toBe(2);
+  });
+
+  test('`delete` method updates map', () => {
+    const { result } = renderHook(() => useMap<string, string>([['hello', 'world']]));
 
     const deleteSpy = jest.spyOn(result.current, 'delete');
     let deleteResult;
@@ -79,9 +81,7 @@ describe('useMap', () => {
       deleteResult = result.current.delete('hello');
     });
 
-    expect(renderCount.current).toBe(3); // re-renders on set, and again on delete
-
-    expect(result.current).toMatchObject(setResult);
+    expect(result.current).toMatchObject(new Map());
     expect(deleteResult).toBeTruthy();
 
     expect(result.current.size).toBe(0);
@@ -90,8 +90,22 @@ describe('useMap', () => {
     expect(deleteSpy).toHaveBeenCalledTimes(1);
   });
 
-  test(`invalid \`delete\` doesn't cause re-render`, () => {
+  test('`delete` method causes re-render', () => {
     const { result, renderCount } = renderHook(() => useMap<string, string>());
+
+    expect(renderCount.current).toBe(1);
+    act(() => {
+      result.current.set('hello', 'world');
+    });
+    expect(renderCount.current).toBe(2);
+    act(() => {
+      result.current.delete('hello');
+    });
+    expect(renderCount.current).toBe(3);
+  });
+
+  test(`invalid \`delete\` doesn't do anything`, () => {
+    const { result } = renderHook(() => useMap<string, string>());
 
     const deleteSpy = jest.spyOn(result.current, 'delete');
 
@@ -100,10 +114,18 @@ describe('useMap', () => {
       badDeleteResult = result.current.delete('hello');
     });
 
-    expect(renderCount.current).toBe(1); // nothing to delete, so no update
-
     expect(badDeleteResult).toBeFalsy();
     expect(result.current.size).toBe(0);
     expect(deleteSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test(`invalid \`delete\` doesn't cause re-render`, () => {
+    const { result, renderCount } = renderHook(() => useMap<string, string>());
+
+    expect(renderCount.current).toBe(1);
+    act(() => {
+      result.current.delete('hello');
+    });
+    expect(renderCount.current).toBe(1);
   });
 });
