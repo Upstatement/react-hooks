@@ -13,6 +13,6 @@ module.exports = {
   },
   setupFilesAfterEnv: ['jest-extended'],
   testURL: 'http://localhost',
-  collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts'],
+  watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };

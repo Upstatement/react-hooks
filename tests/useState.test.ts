@@ -1,3 +1,4 @@
+import 'jest-extended';
 import { act, renderHook } from './utils';
 import { useState } from '../src';
 

@@ -1,3 +1,4 @@
+import 'jest-extended';
 import { renderHook, act } from './utils';
 import { useMultiRef } from '../src';
 
