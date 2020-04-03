@@ -1,8 +1,33 @@
 # @upstatement/react-hooks
 
-> A collection of commonly used React hooks across Upstatement projects.
+> A collection of Upstatement's most-used React hooks
+
+_Add description..._
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Meet the Hooks](#-meet-the-hooks)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [About Upstatement](#about-upstatement)
+
+## Requirements
+
+This package has the following [peer dependencies](https://docs.npmjs.com/files/package.json#peerdependencies):
+
+- [React](https://www.npmjs.com/package/react) v16.8.0+ (for hooks ⚓️)
+
+## Installation
+
+🚧*This section needs some work...*
 
 ## 👋 Meet the Hooks
+
+🚧*This section needs some work...*
+
+All of our hooks have first-class TypeScript support.
 
 ### `useState`
 
@@ -308,3 +333,15 @@ const useSet = iterable => {
   return set;
 };
 ```
+
+## Contributing
+
+We welcome all contributions to our projects! Filing bugs, feature requests, code changes, docs changes, or anything else you'd like to contribute are all more than welcome! More information about contributing can be found in the [contributing guidelines](.github/CONTRIBUTING.md).
+
+## Code of Conduct
+
+Upstatement strives to provide a welcoming, inclusive environment for all users. To hold ourselves accountable to that mission, we have a strictly-enforced [code of conduct](CODE_OF_CONDUCT.md).
+
+## About Upstatement
+
+[Upstatement](https://www.upstatement.com/) is a digital transformation studio headquartered in Boston, MA that imagines and builds exceptional digital experiences. Make sure to check out our [services](https://www.upstatement.com/services/), [work](https://www.upstatement.com/work/), and [open positions](https://www.upstatement.com/jobs/)!
