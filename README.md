@@ -14,7 +14,7 @@ The API remains unchanged from React's `useState` hook: https://reactjs.org/docs
 
 #### Usage
 
-```js
+```jsx
 import { useState } from '@upstatement/react-hooks';
 
 const App = () => {
@@ -69,7 +69,7 @@ set.age(state => state.age + 1); // Increases age by 1
 
 #### Usage
 
-```js
+```jsx
 import { useStateReducer } from '@upstatement/react-hooks';
 
 const UserForm = ({ onSubmit }) => {
@@ -104,7 +104,7 @@ It's important to note that the previous value does not update when the given va
 
 #### Usage
 
-```js
+```jsx
 import { usePrevious } from '@upstatement/react-hooks';
 
 const Direction = ({ scrollY }) => {
@@ -134,7 +134,7 @@ All map methods can then be used as normal, including (but not limited to) `map.
 
 #### Usage
 
-```js
+```jsx
 import { useMap, useState } from '@upstatement/react-hooks';
 
 const DictionarySearch = () => {
@@ -187,7 +187,7 @@ All set methods can then be used as normal, including (but not limited to) `set.
 
 #### Usage
 
-```js
+```jsx
 import { useSet } from '@upstatement/react-hooks';
 
 const Shop = ({ items }) => {
@@ -231,7 +231,7 @@ const [refs, setRef] = useMultiRef();
 
 ### Usage
 
-```js
+```jsx
 import { useEffect } from 'react';
 import { useMultiRef } from '@upstatement/react-hooks';
 import { last } from 'lodash';
