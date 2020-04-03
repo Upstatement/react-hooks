@@ -30,7 +30,7 @@ This package has the following [peer dependencies](https://docs.npmjs.com/files/
 This basic hook provides an extra layer of security over React's existing `useState` hook. While it functions the exact same as the original, our hook will no longer accept updates to the state post-unmount.
 
 <details>
-<summary>Learn more about the <code>useForceUpdate</code> API and Usage</summary>
+<summary>Learn more about the <code>useState</code> API and Usage</summary>
 
 #### API
 
