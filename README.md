@@ -33,6 +33,9 @@ All of our hooks have first-class TypeScript support.
 
 This basic hook provides an extra layer of security over React's existing `useState` hook. While it functions the exact same as the original, our hook will no longer accept updates to the state post-unmount.
 
+<details>
+<summary>Learn more about the <code>useForceUpdate</code> API and Usage</summary>
+
 #### API
 
 The API remains unchanged from React's `useState` hook: https://reactjs.org/docs/hooks-reference.html#usestate
@@ -58,9 +61,14 @@ const App = () => {
 };
 ```
 
+</details>
+
 ### `useStateReducer`
 
 This hook is a step between the `useState` and `useReducer` hooks, providing a way to create a mini state store inside your component.
+
+<details>
+<summary>Learn more about the <code>useStateReducer</code> API and Usage</summary>
 
 #### API
 
@@ -113,9 +121,14 @@ const UserForm = ({ onSubmit }) => {
 };
 ```
 
+</details>
+
 ### `usePrevious`
 
 This hook allows for tracking of the value of a given variable on a previous render.
+
+<details>
+<summary>Learn more about the <code>usePrevious</code> API and Usage</summary>
 
 #### API
 
@@ -144,9 +157,14 @@ const Direction = ({ scrollY }) => {
 };
 ```
 
+</details>
+
 ### `useMap`
 
 This hook allows for use of the [ES6 Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) as a state variable inside your React component.
+
+<details>
+<summary>Learn more about the <code>useMap</code> API and Usage</summary>
 
 #### API
 
@@ -197,9 +215,14 @@ const DictionarySearch = () => {
 };
 ```
 
+</details>
+
 ### `useSet`
 
 Similar to `useMap`, this hook allows you to use an [ES6 Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) as a state variable inside your React component.
+
+<details>
+<summary>Learn more about the <code>useSet</code> API and Usage</summary>
 
 #### API
 
@@ -244,9 +267,14 @@ const Shop = ({ items }) => {
 };
 ```
 
+</details>
+
 ### `useMultiRef`
 
 Allows for tracking multiple refs in the React DOM. This is particularly useful when looping over items.
+
+<details>
+<summary>Learn more about the <code>useMultiRef</code> API and Usage</summary>
 
 ### API
 
@@ -298,9 +326,14 @@ const Modal = ({ links }) => {
 };
 ```
 
+</details>
+
 ### `useForceUpdate`
 
 This utility hook provides a way to force the a component to update. It's recommended to _only be used_ when the DOM is dependent on a ref value.
+
+<details>
+<summary>Learn more about the <code>useForceUpdate</code> API and Usage</summary>
 
 #### API
 
@@ -333,6 +366,8 @@ const useSet = iterable => {
   return set;
 };
 ```
+
+</details>
 
 ## Contributing
 
