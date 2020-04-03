@@ -1,6 +1,7 @@
 import { useDebugValue, useMemo, useReducer } from 'react';
 import useState from './useState';
-import { AnonFunction } from './types';
+
+type AnonFunction = (...args: any[]) => void;
 
 type SetStateAction<State, K extends keyof State> =
   | State[K]

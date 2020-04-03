@@ -38,7 +38,7 @@ const outputs = [
 export default {
   input: fs
     .readdirSync(path.resolve(__dirname, 'src'))
-    .filter(file => file.endsWith('.ts') && !file.endsWith('.d.ts'))
+    .filter(file => new RegExp(/.*(?<!(.d))(.ts)$/g).test(file)) // don't match *.d.ts files
     .map(file => `src/${file}`),
   output: outputs.map(({ esModule, name, format }) => ({
     format,
