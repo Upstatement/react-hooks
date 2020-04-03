@@ -10,7 +10,17 @@ import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const prodPlugins = [cleanup(), terser()];
+const prodPlugins = [
+  cleanup(),
+  terser({
+    mangle: {
+      keep_fnames: true,
+    },
+    compress: {
+      module: false,
+    },
+  }),
+];
 
 const outputs = [
   {
@@ -35,6 +45,7 @@ export default {
     esModule,
     entryFileNames: '[name].js',
     dir: pkg[name],
+    sourcemap: !isProduction,
   })),
   plugins: [
     babel({

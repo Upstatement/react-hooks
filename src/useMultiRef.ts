@@ -1,4 +1,4 @@
-import { MutableRefObject, useRef } from 'react';
+import { MutableRefObject, useDebugValue, useRef } from 'react';
 
 type SetRef<T> = (ref: T) => void;
 type SetRefFactory<T> = (index: number) => SetRef<T>;
@@ -33,6 +33,8 @@ const useMultiRef = <T>(): [MutableRefObject<T[]>, SetRefFactory<T>, () => void]
   const clearRefs = () => {
     refs.current = [];
   };
+
+  useDebugValue(refs);
 
   return [refs, setRef, clearRefs];
 };
