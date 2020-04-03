@@ -88,12 +88,13 @@ The `set` function contains a number of properties that update the respective va
 
 ```js
 const [state, set] = useStateReducer({
-  name: 'John',
   age: 6,
+  maxAge: 8,
 });
 
-set.name('Andrew'); // Sets name to "Andrew"
-set.age(state => state.age + 1); // Increases age by 1
+set.age(5); // Sets age to 5
+set.age(age => age + 1); // Increases age by 1
+set.age((age, state) => Math.min(age + 1, state.maxAge)); // Increases age by 1, capped by current state's maxAge value
 ```
 
 #### Usage
