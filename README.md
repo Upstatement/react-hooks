@@ -2,7 +2,7 @@
 
 > A collection of Upstatement's most-used React hooks
 
-_Add description..._
+A collection of Upstatement's most-used React hooks across projects, updated to have first-class TypeScript support!
 
 ## Table of Contents
 
@@ -24,10 +24,6 @@ This package has the following [peer dependencies](https://docs.npmjs.com/files/
 🚧*This section needs some work...*
 
 ## 👋 Meet the Hooks
-
-🚧*This section needs some work...*
-
-All of our hooks have first-class TypeScript support.
 
 ### `useState`
 
