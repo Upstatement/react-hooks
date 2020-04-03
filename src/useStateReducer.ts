@@ -1,10 +1,14 @@
-import { SetStateAction, useMemo, useReducer } from 'react';
+import { useMemo, useReducer } from 'react';
 import useState from './useState';
 import { AnonFunction } from './types';
 
+type SetStateAction<State, K extends keyof State> =
+  | State[K]
+  | ((prevState: State[K], prevGlobalState: State) => State[K]);
+
 type Payload<State, K extends keyof State> = State[K] extends Function
   ? never
-  : State[K] | SetStateAction<State[K]>;
+  : State[K] | SetStateAction<State, K>;
 
 type Action<State> = {
   type: keyof State;
@@ -46,7 +50,7 @@ const useStateReducer = <T extends Record<string, any>>(
 
     let value = payload;
     if (typeof payload === 'function') {
-      value = payload(state);
+      value = payload(state[type], state);
     }
 
     return {
