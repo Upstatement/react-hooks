@@ -21,7 +21,29 @@ This package has the following [peer dependencies](https://docs.npmjs.com/files/
 
 ## Installation
 
-🚧*This section needs some work...*
+With [npm](https://www.npmjs.com/):
+
+```shell
+$ npm install @upstatement/react-hooks
+```
+
+With [yarn](https://yarnpkg.com/):
+
+```shell
+$ yarn add @upstatement/react-hooks
+```
+
+Then with a module bundler like [webpack](https://webpack.github.io/), use as you would anything else:
+
+```js
+// using ES6 modules
+import { useMultiRef, useSet } from '@upstatement/react-hooks';
+import useMultiRef from '@upstatement/react-hooks/dist/esm/useMultiRef';
+
+// using CommonJS modules
+const { useMultiRef, useSet } = require('@upstatement/react-hooks');
+const useMultiRef = require('@upstatement/react-hooks/dist/cjs/useMultiRef');
+```
 
 ## 👋 Meet the Hooks
 
