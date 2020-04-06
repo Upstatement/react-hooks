@@ -49,11 +49,27 @@ describe('useStateReducer', () => {
     expect(state.foo).toBe('bar');
   });
 
-  test('setter function accepts function to update state', () => {
+  test('setter function accepts function that passes value state', () => {
+    const initialState = { foo: 1 };
+    const { result } = renderHook(() => useStateReducer(initialState));
+
+    const stateSetter = jest.fn(foo => foo + 1);
+
+    act(() => {
+      result.current[1].foo(stateSetter);
+    });
+
+    expect(stateSetter).toHaveBeenCalledTimes(1);
+
+    const [state] = result.current;
+    expect(state.foo).toBe(2);
+  });
+
+  test('setter function accepts function that passes global state', () => {
     const initialState = { foo: 'bar', baz: '' };
     const { result } = renderHook(() => useStateReducer(initialState));
 
-    const stateSetter = jest.fn(state => state.foo);
+    const stateSetter = jest.fn((baz, state) => state.foo);
 
     act(() => {
       result.current[1].baz(stateSetter);
