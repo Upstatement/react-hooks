@@ -1,6 +1,7 @@
-import { useMemo, useReducer } from 'react';
+import { useDebugValue, useMemo, useReducer } from 'react';
 import useState from './useState';
-import { AnonFunction } from './types';
+
+type AnonFunction = (...args: any[]) => void;
 
 type SetStateAction<State, K extends keyof State> =
   | State[K]
@@ -81,6 +82,8 @@ const useStateReducer = <T extends Record<string, any>>(
       return acc;
     }, {} as { [Key in keyof State<T>]: Dispatch<State<T>, Key> });
   }, [dispatch]);
+
+  useDebugValue(state);
 
   return [state, stateDispatcher];
 };
