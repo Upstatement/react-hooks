@@ -2,7 +2,7 @@
 
 > A collection of Upstatement's most-used React hooks
 
-![](https://github.com/Upstatement/react-hooks/workflows/.github/workflows/main.yml/badge.svg?branch=master)
+![](https://github.com/Upstatement/react-hooks/workflows/CI/badge.svg?branch=master)
 
 A collection of Upstatement's most-used React hooks across projects, updated to have first-class TypeScript support!
 
