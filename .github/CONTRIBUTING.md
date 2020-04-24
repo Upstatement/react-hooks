@@ -18,7 +18,6 @@
   - [Review Pull Requests](#review-pull-requests)
   - [Merge Pull Requests](#merge-pull-requests)
   - [Release Workflow](#release-workflow)
-  - [Tag a Release](#tag-a-release)
 - Add a Guide Like This One [To My Project](#attribution)?
 
 ## Introduction
