@@ -8,7 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged # only update on PR update
 
     steps:
       - name: Check out the branch

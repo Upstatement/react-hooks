@@ -240,7 +240,7 @@ With GitHub actions, our workflow for publishing new version to NPM are automati
 
 2. Create a new pull request with the commit. Be sure to follow the steps in the [Contribute Code](#contribute-code) section.
 
-3. If the pull request is merged successfully, the `Release` action should publish the latest version to NPM and create a new release.
+3. If the pull request is merged successfully, the [`Release` action](./workflows/release.yml) should publish the latest version to NPM and create a new release.
 
 ## Attribution
 
