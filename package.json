@@ -4,6 +4,12 @@
   "description": "A collection of Upstatement's most-used React hooks",
   "author": "Upstatement <tech@upstatement.com>",
   "license": "ISC",
+  "keywords": [
+    "react",
+    "hooks",
+    "typescript",
+    "upstatement"
+  ],
   "main": "dist/cjs",
   "module": "dist/esm",
   "types": "dist/esm/index.d.ts",

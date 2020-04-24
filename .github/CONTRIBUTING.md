@@ -221,12 +221,22 @@ TBD - need to hash out a bit more of this process.
 
 With GitHub actions, our workflow for publishing new version to NPM are automatic! Here are the steps you need to take to ensure a release occurs:
 
-1. In a commit, update your [`package.json`](../package.json) and [`package-lock.json`](../package-lock.json) with the next version. We use [semver](https://semver.org) for versioning:
+1. In a commit, update your [`package.json`](../package.json) and [`package-lock.json`](../package-lock.json) with the next version. You can either perform this manually, or via the [NPM `version` command](https://docs.npmjs.com/cli/version):
 
-```diff
-- "version": "1.0.0",
-+ "version": "1.0.1", # minor update
-```
+   ```sh
+   npm version patch
+   # npm version minor
+   # npm version major
+   ```
+
+   or, in [`package.json`](../package.json) and [`package-lock.json`](../package-lock.json):
+
+   ```diff
+   - "version": "1.0.0",
+   + "version": "1.0.1", # patch update
+   ```
+
+   > _Note:_ We use [semver](https://semver.org) for versioning.
 
 2. Create a new pull request with the commit. Be sure to follow the steps in the [Contribute Code](#contribute-code) section.
 
