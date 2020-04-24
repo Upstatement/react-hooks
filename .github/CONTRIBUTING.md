@@ -220,7 +220,7 @@ TBD - need to hash out a bit more of this process.
 
 With GitHub actions, our workflow for publishing new version to NPM are automatic! Here are the steps you need to take to ensure a release occurs:
 
-1. In a commit, use the [NPM `version` command](https://docs.npmjs.com/cli/version) to update the package to the next version:
+1. In a new branch, use the [NPM `version` command](https://docs.npmjs.com/cli/version) to update the package to the next version. This will automatically update the `package.json` and create a commit with an associated tag:
 
    ```sh
    npm version patch
@@ -228,7 +228,7 @@ With GitHub actions, our workflow for publishing new version to NPM are automati
    # npm version major
    ```
 
-2. Create a new pull request with the commit. Be sure to follow the steps in the [Contribute Code](#contribute-code) section.
+2. Create a new pull request with your branch. Be sure to follow the steps in the [Contribute Code](#contribute-code) section.
 
 3. If the pull request is merged successfully, the [`Release` action](./workflows/release.yml) should publish the latest version to NPM and create a new release.
 
