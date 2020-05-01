@@ -2,7 +2,7 @@
 
 > A collection of Upstatement's most-used React hooks
 
-![](https://github.com/Upstatement/react-hooks/workflows/CI/badge.svg?branch=master)
+![](https://github.com/Upstatement/react-hooks/workflows/CI/badge.svg?branch=master) [![](https://badgen.net/npm/v/@upstatement/react-hooks)](https://www.npmjs.com/package/@upstatement/react-hooks)
 
 A collection of Upstatement's most-used React hooks across projects, updated to have first-class TypeScript support!
 

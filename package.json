@@ -1,9 +1,15 @@
 {
   "name": "@upstatement/react-hooks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of Upstatement's most-used React hooks",
   "author": "Upstatement <tech@upstatement.com>",
   "license": "ISC",
+  "keywords": [
+    "react",
+    "hooks",
+    "typescript",
+    "upstatement"
+  ],
   "main": "dist/cjs",
   "module": "dist/esm",
   "types": "dist/esm/index.d.ts",
