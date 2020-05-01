@@ -37,6 +37,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         if: steps.version_check.outputs.changed == 'true'
